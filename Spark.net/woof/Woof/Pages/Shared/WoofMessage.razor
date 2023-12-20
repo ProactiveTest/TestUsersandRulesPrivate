@@ -1,0 +1,45 @@
+@inject MessagesService mesageservice
+@inject NavigationManager nav
+
+<article>
+    <hgroup>
+        <h2>@Message.User</h2>
+        <h3>@Message.CreatedAt</h3>
+    </hgroup>
+    <p>
+        @Message.Content
+    </p>
+    <AuthorizeView>
+        <Authorized>
+            <div class="grid">
+                <div>
+                    <a href="/messages/@Message.Id">View</a>
+                </div>
+                <div>
+                    <a href="/messages/@Message.Id/edit">Edit</a>
+                </div>
+                <div>
+                    <button class="secondary outline" @onclick="DeleteMessage">Delete</button>
+                </div>
+            </div>
+        </Authorized>
+    </AuthorizeView>
+</article>
+
+@code{
+    [Parameter]
+    public Message Message { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    private async Task DeleteMessage()
+    {
+        await mesageservice.Destroy(Message);
+        nav.NavigateTo("", true);
+    }
+
+
+}

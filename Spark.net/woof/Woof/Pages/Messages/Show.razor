@@ -1,0 +1,19 @@
+@page "/messages/{id:int}"
+@attribute [Authorize]
+
+@if(message != null)
+{
+    <article>
+        <hgroup>
+            <h2>@message.User.Name</h2>
+            <h3>@message.CreatedAt</h3>
+        </hgroup>
+        <p>@message.Content</p>
+    </article>
+}
+
+@code{
+  
+
+
+}

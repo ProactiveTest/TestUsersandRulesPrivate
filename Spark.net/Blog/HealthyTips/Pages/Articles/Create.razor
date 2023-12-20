@@ -1,0 +1,44 @@
+@page "/articles/create"
+@attribute [Authorize]
+@inject IDbContextFactory<DatabaseContext> factory
+@inject NavigationManager nav
+
+<section>
+    <h1>Create a new Article</h1>
+    <article>
+        <EditForm Model="newArticle" OnSubmit="CreateArticle">
+            <label>Title</label>
+            <InputText @bind-Value="@newArticle.Title"></InputText>
+
+            <label>Content</label>
+            <InputTextArea @bind-Value="newArticle.Content" rows="10">
+
+            </InputTextArea>
+
+            <button tyepe="submit">Create</button>
+        </EditForm>
+    </article>
+</section>
+
+@code{
+    [CascadingParameter]
+    public MainLayout? Layout { get; set; }
+    private User? user => Layout.User;
+    private Article newArticle = new Article();
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    protected void CreateArticle()
+    {
+        newArticle.UserId = user.Id.ToString();
+        newArticle.Slug = newArticle.Title.ToSlug();
+        newArticle.User = user.Name;
+        using var db = factory.CreateDbContext();
+        db.Articles.Save(newArticle);
+
+        nav.NavigateTo("");
+    }
+}
