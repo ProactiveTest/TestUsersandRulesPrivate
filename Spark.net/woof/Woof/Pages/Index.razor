@@ -1,0 +1,23 @@
+﻿@page "/"
+@inject ILogger logger
+@inject MessagesService messageService
+
+<PageTitle>Home page</PageTitle>
+
+<section>
+    <h1>
+        Feed
+    </h1>
+    <AuthorizeView>
+        <Authorized>
+            <a href="/messages/create" role="button">Create New</a>
+        </Authorized>
+    </AuthorizeView>
+
+    @foreach (var message in Messages)
+    {
+        <WoofMessage Message="@message" />
+    }
+   
+</section>
+

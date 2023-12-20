@@ -1,0 +1,49 @@
+﻿@page "/register"
+@model Register
+@{
+	Layout = "_AuthLayout";
+	ViewData["Title"] = "Register";
+}
+<section class="container py-5 my-5">
+	<a href="/" class="text-secondary">
+		← back to home page
+	</a>
+	<article class="p-4 my-5 shadow card">
+		<h1 class="mb-5 fw-bold">
+			Create your account
+		</h1>
+		<form method="post">
+			<div class="mb-1 text-danger">
+				<small>
+					@Html.ValidationSummary()
+				</small>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Model.Name" class="form-label">Name</label>
+				<input asp-for="Model.Name" type="text" class="form-control" required>
+				<small class="text-danger">@Html.ValidationMessageFor(m => m.Model.Name)</small>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Model.Email" class="form-label">Email address</label>
+				<input asp-for="Model.Email" type="email" class="form-control" required>
+				<small class="text-danger">@Html.ValidationMessageFor(m => m.Model.Email)</small>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Model.Password" class="form-label">Password</label>
+				<input asp-for="Model.Password" type="password" autocomplete="current-password" class="form-control" required>
+				<small class="text-danger">@Html.ValidationMessageFor(m => m.Model.Password)</small>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Model.ConfirmPassword" class="form-label">Confirm password</label>
+				<input asp-for="Model.ConfirmPassword" type="password" autocomplete="current-password" class="form-control" required>
+				<small class="text-danger">@Html.ValidationMessageFor(m => m.Model.ConfirmPassword)</small>
+			</div>
+			<button type="submit" class="btn btn-primary">Create account</button>
+		</form>
+		<div class="mt-5">
+			<a href="/login" class="text-secondary">
+				Already registered? Sign in
+			</a>
+		</div>
+	</article>
+</section>

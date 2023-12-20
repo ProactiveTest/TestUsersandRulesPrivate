@@ -1,0 +1,29 @@
+<article>
+    <hgroup>
+        <h1>
+            @article.Title
+        </h1>
+        <h2>
+            @article.UserId - @article.CreatedAt
+        </h2>
+    </hgroup>
+    <p>@article.Content</p>
+    <a href="/articles/@article.Slug">View</a>
+    <AuthorizeView>
+        <Authorized>
+            <span> </span>
+                <a href="/articles/@article.Id/edit">Edit</a>            
+        </Authorized>
+    </AuthorizeView>
+</article>
+
+@code{
+
+    [Parameter]
+    public Article article { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+    }
+}

@@ -1,0 +1,15 @@
+﻿@inherits LayoutComponentBase
+@inject UsersService userService
+
+<PageTitle>@Env.Get("APP_NAME")</PageTitle>
+
+<CascadingValue Value="this">
+    <NavMenu />
+    <main class="container">
+        @Body
+    </main>
+</CascadingValue>
+
+@code{
+
+}

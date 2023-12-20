@@ -1,0 +1,33 @@
+@page "/messages/create"
+@attribute [Authorize]
+@inject MessagesService serv
+@inject NavigationManager nav
+
+<h1>Create Woof</h1>
+<article>
+    <EditForm Model="message" OnValidSubmit="CreateMessage">
+        <label for="content">Message</label>
+        <InputTextArea @bind-Value="message.Content" id="content"></InputTextArea>
+        <button type="submit">Create</button>
+    </EditForm>
+</article>
+
+
+@code{
+    [CascadingParameter]
+    public MainLayout? Layout { get; set; }
+    private User? user => Layout.User;
+
+    public Message message = new Message();
+
+    private async Task CreateMessage()
+    {
+        message.CreatedAt = DateTime.Now;
+        message.UserId = user.Id;
+        await  serv.Store(message);
+        nav.NavigateTo("");
+
+
+
+    }
+}
