@@ -1,0 +1,35 @@
+﻿@page "/"
+@inject ILogger loger
+@inject IDbContextFactory<DatabaseContext> factory
+
+<PageTitle>Home page</PageTitle>
+
+<section class="container py-5 my-5 text-left">
+    <article class="p-5 my-5 shadow rounded text-left bg-white">
+        <h1 class="mb-5 fw-bold">
+            Recent Posts
+        </h1>
+        <AuthorizeView>
+            <Authorized>
+                <a href="articles/create">Create new article</a>
+            </Authorized>
+        </AuthorizeView>
+
+        @foreach(var article in Articles)
+        {
+            <ArticlePreview article="article"></ArticlePreview>
+        }
+    </article>
+</section>
+
+@code{
+    private List<Article> Articles = new List<Article>();
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        using var db = factory.CreateDbContext();
+        Articles = db.Articles.OrderByDescending(x => x.CreatedAt).ToList();
+    }
+
+}
