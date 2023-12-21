@@ -25,5 +25,7 @@ jobs:
       working-directory: Spark.net/Blog/HealthyTips
     - name: Build
       run: dotnet build --no-restore
+      working-directory: Spark.net/Blog/HealthyTips
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      working-directory: Spark.net/Blog/HealthyTips
