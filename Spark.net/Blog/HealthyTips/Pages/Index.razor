@@ -28,6 +28,7 @@
     protected override async Task OnInitializedAsync()
     {
 
+
         using var db = factory.CreateDbContext();
         Articles = db.Articles.OrderByDescending(x => x.CreatedAt).ToList();
     }
