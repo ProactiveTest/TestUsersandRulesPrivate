@@ -11,7 +11,7 @@
         </h1>
         <AuthorizeView>
             <Authorized>
-                <a href="articles/create">Create new article</a>
+                <a href="articles/create">Create new article ---> :)</a>
             </Authorized>
         </AuthorizeView>
 
@@ -27,6 +27,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+
+
 
         using var db = factory.CreateDbContext();
         Articles = db.Articles.OrderByDescending(x => x.CreatedAt).ToList();
